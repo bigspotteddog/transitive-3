@@ -12,7 +12,7 @@ String getCommitId() {
     return gitHash.trim()
   }
   else {
-    stdout = bat(returnStdout:true , script: 'git rev-parse HEAD').trim()
+    stdout = sh(returnStdout:true , script: 'git rev-parse HEAD').trim()
     result = stdout.readLines().drop(1).join(" ")
     return result
 //    def p = "git rev-parse HEAD".execute()
@@ -28,5 +28,5 @@ def postGitHub(commitId, state, context, description, targetUrl) {
   String payload = String.format("{\\\"state\\\":\\\"%s\\\",\\\"context\\\":\\\"%s\\\",\\\"description\\\":\\\"%s\\\",\\\"target_url\\\":\\\"%s\\\"}",
     state, context, description, targetUrl)
 //  def payload = "{\"state\":\"" + state + "\"}"  //''{ "state":"' + state + '","context":"' + context + '","description":"' + description + '","target_url":"' + targetUrl + '"}'
-  bat "curl -H \"Authorization: token ${gitHubApiToken}\" --request POST --data \"${payload}\" https://api.github.com/repos/${project}/statuses/${commitId}"
+  sh "curl -H \"Authorization: token ${gitHubApiToken}\" --request POST --data \"${payload}\" https://api.github.com/repos/${project}/statuses/${commitId}"
 }
