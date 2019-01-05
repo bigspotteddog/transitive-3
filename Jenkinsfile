@@ -4,9 +4,6 @@ withEnv([
     'ENVIRONMENT=dev',
     'project=depshield-testing/transitive-3'
   ]) {
-  withCredentials([
-    string(credentialsId: 'gitHubApiToken', variable: 'gitHubApiToken')
-  ]) {
   node {
     stage('Build') {
         try {
@@ -32,6 +29,5 @@ withEnv([
           throw error
         }
     }
-  }
   }
 }
