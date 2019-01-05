@@ -7,7 +7,7 @@ withEnv([
   node {
     stage('Build') {
         try {
-          bat  "mvn clean package"
+          sh  "mvn clean package"
         } catch (error) {
           throw error
         }
