@@ -2,7 +2,7 @@
 
 withEnv([
     'ENVIRONMENT=dev',
-    'project=depshield-testing/transitive-3'
+    'project=bigspotteddog/transitive-3'
   ]) {
   node {
     stage('Build') {
